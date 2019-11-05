@@ -7,24 +7,26 @@
 #include<map>
 #include<chrono>
 using namespace std;
-using namespace std::chrono;
 
 vector<string> ReadFile(string FileName);
 
 int main()
 {
 	//check run time
-	//auto start = high_resolution_clock::now();
+	auto start = std::chrono::high_resolution_clock::now();
 
+	//source data
 	vector<string> _data;
 
+	//server data input
 	string s;
 	while (getline(cin,s))
 	{
 		_data.push_back(s);
 	}
 
-	//_data = ReadFile("strings1000.txt");
+	//import data from file
+	_data = ReadFile("strings1000.txt");
 
 	map<string, vector<string>> Output;
 
@@ -34,9 +36,9 @@ int main()
 		{
 			if (i.length() == j.length() && i != j)//if same length
 			{
-				int Sameletter = 0;//track how many letters are the same
+				unsigned int Sameletter = 0;//track how many letters are the same
 
-				for (int index = 0; index < i.length(); index++)//each letter i
+				for (unsigned int index = 0; index < i.length(); index++)//each letter
 				{
 					if (i[index] == j[index])//if same letter
 					{
@@ -51,13 +53,15 @@ int main()
 				//if only one letter is different
 				if (Sameletter == i.length() - 1)
 				{
-					Output.insert(pair<string, vector<string>>(i, vector<string>()));//init target as key, and an empty vector as value
-					Output[i].push_back(j);// insert value
+					if(Output.count(i)<=0)//if key exist
+						Output.insert(pair<string, vector<string>>(i, vector<string>()));//init target as key, and an empty vector as value
+					Output[i].push_back(j);// push value
 				}
 			}
 		}
 	}
 
+	//display
 	for (auto i : Output)
 	{
 		cout << i.first << " ";
@@ -68,12 +72,14 @@ int main()
 		cout << endl;
 	}
 
+	//display run time
 	//auto stop = high_resolution_clock::now();
 	//
-	//auto duration = duration_cast<seconds>(stop - start);
+	//auto duration = duration_cast<milliseconds>(stop - start);
 	//
-	//cout << duration.count() << endl;
+	//cout << "Run time in Milliseconds: " << duration.count() << endl;
 
+	//end
 	getchar();
 	getchar();
 	return 0;
