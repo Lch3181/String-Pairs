@@ -13,7 +13,7 @@ vector<string> ReadFile(string FileName);
 int main()
 {
 	//check run time
-	auto start = std::chrono::high_resolution_clock::now();
+	//auto start = std::chrono::high_resolution_clock::now();
 
 	//source data
 	vector<string> _data;
@@ -26,7 +26,7 @@ int main()
 	}
 
 	//import data from file
-	_data = ReadFile("strings1000.txt");
+	//_data = ReadFile("strings1000.txt");
 
 	map<string, vector<string>> Output;
 
